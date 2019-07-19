@@ -847,7 +847,6 @@ function LazyPig_QueueBG()
 		else
 			JoinBattlefield(0);
 		end
-		ClearTarget();
 		BattlefieldFrameCancelButton:Click()
 	end	
 end		
@@ -1020,7 +1019,6 @@ end
 function LazyPig_PrepareQuestAutoPickup()
 	if IsAltKeyDown() then
 		GossipFrameCloseButton:Click();
-		ClearTarget();
 	end	
 end
 
@@ -1865,7 +1863,6 @@ function LazyPig_Track_EFC(msg)
 end
 
 function LazyPig_Target_EFC()
-	ClearTarget()
 	if wsgefc then
 		TargetByName(wsgefc, true) 
 		UIErrorsFrame:Clear()
