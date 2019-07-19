@@ -327,7 +327,9 @@ function LazyPig_OnUpdate()
 		
 	if(current_time - roster_task_refresh) > 29 then
 		roster_task_refresh = current_time
-		GuildRoster();
+		if IsInGuild() then
+			GuildRoster();
+		end
 		ChatSpamClean();
 	end
 	
@@ -1009,6 +1011,7 @@ function LazyPig_ProcessQuests(...)
 	for i = 1, #arg, 2 do
 		local count, title, level = i, arg[i], arg[i+1]
 		if count > 1 then count = (count+1)/2 end
+		if level == nil then level = "nil" end
 		quest[count] = title.." "..level
 	end
 	return quest
