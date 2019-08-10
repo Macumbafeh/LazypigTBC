@@ -596,7 +596,7 @@ function LazyPig_OnEvent(event)
 
 		local active_quests = {GetGossipActiveQuests()}
 		ActiveQuest = LazyPig_ProcessQuests(active_quests)
-		local available_quests = {GetGossipActiveQuests()}
+		local available_quests = {GetGossipAvailableQuests()}
 		AvailableQuest = LazyPig_ProcessQuests(available_quests)
 		
 		if QuestRecord["qnpc"] ~= UnitName("target") then
