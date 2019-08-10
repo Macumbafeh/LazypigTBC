@@ -594,8 +594,10 @@ function LazyPig_OnEvent(event)
 		
 		dsc,GossipOptions[1],_,GossipOptions[2],_,GossipOptions[3],_,GossipOptions[4],_,GossipOptions[5] = GetGossipOptions()	
 
-		ActiveQuest = LazyPig_ProcessQuests(GetGossipActiveQuests())
-		AvailableQuest = LazyPig_ProcessQuests(GetGossipAvailableQuests())
+		local active_quests = {GetGossipActiveQuests()}
+		ActiveQuest = LazyPig_ProcessQuests(active_quests)
+		local available_quests = {GetGossipActiveQuests()}
+		AvailableQuest = LazyPig_ProcessQuests(available_quests)
 		
 		if QuestRecord["qnpc"] ~= UnitName("target") then
 			QuestRecord["index"] = 0
@@ -1005,13 +1007,17 @@ function LazyPig_GreySellRepair()
 	end	
 end
 
-function LazyPig_ProcessQuests(...)
+function LazyPig_ProcessQuests(values)
 	local quest = {}
-	for i = 1, #arg, 2 do
-		local count, title, level = i, arg[i], arg[i+1]
-		if count > 1 then count = (count+1)/2 end
-		if level == nil then level = "nil" end
-		quest[count] = title.." "..level
+	local isTitle = true
+	for i,v in pairs(values) do
+		if(isTitle) then
+			local count, title, level = i, values[i], values[i+1]
+			if count > 1 then count = (count+1)/2 end
+			if level == nil then level = "nil" end
+			quest[count] = title.." "..level
+		end
+		isTitle = not isTitle
 	end
 	return quest
 end
@@ -1078,6 +1084,7 @@ function LazyPig_ReplyQuest(event)
 			UIErrorsFrame:Clear();
 			UIErrorsFrame:AddMessage("Replaying: "..QuestRecord["details"])
 		end
+
 		
 		if event == "GOSSIP_SHOW" then
 			if QuestRecord["details"] then
