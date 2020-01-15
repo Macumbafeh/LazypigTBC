@@ -653,15 +653,31 @@ function LazyPig_OnEvent(event)
 			AcceptGroupInvite();
 		end
 	elseif(event == "RESURRECT_REQUEST" and LPCONFIG.REZ) then
+		-- arg1 is the name of the person who cast the resurrection
 		UIErrorsFrame:AddMessage(arg1.." - Resurrection")
-		TargetByName(arg1, true)
-		if GetCorpseRecoveryDelay() == 0 and (LazyPig_Raid() or LazyPig_Dungeon() or LazyPig_BG()) and UnitIsPlayer("target") and UnitIsVisible("target") and not UnitAffectingCombat("target") then
+
+		local groupPrefix;
+		local numGroupMembers = 0;
+		if UnitInRaid("player") then
+			groupPrefix = "raid";
+			numGroupMembers = GetNumRaidMembers()
+		elseif UnitInParty("player") then
+			groupPrefix = "party";
+			numGroupMembers = GetNumPartyMembers()
+		end
+
+		local i=1;
+		local unitID = groupPrefix..i;
+		while(UnitName(unitID) ~= arg1 and i < numGroupMembers) do
+			i = i+1;
+			unitID = groupPrefix..i
+		end
+		if i <= numGroupMembers and GetCorpseRecoveryDelay() == 0 and (LazyPig_Raid() or LazyPig_Dungeon() or LazyPig_BG()) and UnitIsPlayer(unitID) and UnitIsVisible(unitID) and not UnitAffectingCombat(unitID) then
 			AcceptResurrect()
 			StaticPopup_Hide("RESURRECT_NO_TIMER"); 
 			StaticPopup_Hide("RESURRECT_NO_SICKNESS");
 			StaticPopup_Hide("RESURRECT");
 		end
-		TargetLastTarget();
 	end
 	--DEFAULT_CHAT_FRAME:AddMessage(event);	
 end
