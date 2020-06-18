@@ -10,7 +10,7 @@ Current state: Testing. The addon still spawns a number of errors (see issues) i
 
 ## Installation and Usage
 
-Download the latest release (see release tab) and extract it to your <code>Worldofwarcaft/Interface/Addons</code> directory. As with all addons, make sure the name of the addon folder matches the name of the `.toc` file. In this case, both should be `LazyPig`. Enable the addon from the character pane. Open lazypigs interface settings with <b>/lp</b>
+Download the latest release (see release tab) and extract it to your <code>Worldofwarcaft/Interface/Addons</code> directory. As with all addons, make sure the name of the addon folder matches the name of the `.toc` file. In this case, both should be `_LazyPig`. Enable the addon from the character pane. Open lazypigs interface settings with <b>/lp</b>
 
 ## Features
 
