@@ -330,7 +330,8 @@ function LazyPig_OnUpdate()
 		if IsInGuild() then
 			GuildRoster();
 		end
-		ChatSpamClean();
+		--TODO: This is causing issues with custom chat channels (including world) in non-default chat tabs. Disabling it for now.
+		--ChatSpamClean();
 	end
 	
 	if save_time ~= 0 and (current_time - save_time) > 3 and not GetBattlefieldWinner() and not UnitAffectingCombat("player") then	
