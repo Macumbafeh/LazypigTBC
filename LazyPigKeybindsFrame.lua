@@ -105,7 +105,7 @@ function LazyPig_CreateKeybindsFrame()
 
 	frame:Hide()
 	frame:SetScript("OnShow", function()
-		LazyPig_ShowBindings("LOGOUT", "LP_KB1", "CTRL+ALT+SHIFT");
+		LazyPig_ShowBindings("LOGOUT", "LP_KB1");
 		LazyPig_ShowBindings("UNSTUCK", "LP_KB2");
 		LazyPig_ShowBindings("RELOAD", "LP_KB3");
 		LazyPig_ShowBindings("DUEL", "LP_KB4");

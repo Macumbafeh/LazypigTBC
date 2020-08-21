@@ -236,10 +236,7 @@ function LazyPig_OnUpdate()
 	end
 			
 	if LPCONFIG.SPECIALKEY then
-		if ctrlstatus and shiftstatus and altstatus and current_time > delayaction then
-			delayaction = current_time + 1
-			Logout();
-		elseif ctrlstatus and not shiftstatus and altstatus and not auctionstatus and not mailstatus and current_time > delayaction then	
+		if ctrlstatus and not shiftstatus and altstatus and not auctionstatus and not mailstatus and current_time > delayaction then
 			if tradestatus then
 				AcceptTrade();
 			elseif not tradestatus and UnitExists("target") and UnitIsPlayer("target") and UnitIsFriend("target", "player") and not UnitIsUnit("player", "target") and CheckInteractDistance("target", 2) and (current_time + 0.25) > ctrlalttime and current_time > tradedelay then
