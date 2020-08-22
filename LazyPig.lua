@@ -254,6 +254,16 @@ function LazyPig_OnUpdate()
 		if ctrlstatus and not shiftstatus and altstatus or passpopup > current_time then
 			if current_time > delayaction and not LazyPig_BindLootOpen() and not LazyPig_RollLootOpen() and LazyPig_GreenRoll() then	
 				delayaction = current_time + 1
+			elseif current_time > delayaction and (LazyPig_BindLootOpen() or LazyPig_RollLootOpen()) then
+				for i=1,STATICPOPUP_NUMDIALOGS do
+					local frame = getglobal("StaticPopup"..i)
+					if frame:IsShown() then
+						if frame.which == "LOOT_BIND" or frame.which == "CONFIRM_LOOT_ROLL" then
+							getglobal("StaticPopup"..i.."Button1"):Click();
+						end
+					end
+				end
+				delayaction = current_time + 1
 			elseif current_time > delayaction then
 				for i=1,STATICPOPUP_NUMDIALOGS do
 					local frame = getglobal("StaticPopup"..i)
